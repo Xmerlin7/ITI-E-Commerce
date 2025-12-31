@@ -1,3 +1,5 @@
+import { addToCart, deleteFromCart, getCart } from "./cart.js";
+
 export function renderProducts(data) {
   const productsContainer = document.querySelector(".product-container");
   if (!productsContainer) {
@@ -50,16 +52,15 @@ export function renderProducts(data) {
     info.appendChild(description);
     card.appendChild(info);
 
-    const addToCart = document.createElement("button");
-    addToCart.textContent = "Add to Cart";
-    addToCart.classList.add("product-add");
+    const addToCartBtn = document.createElement("button");
+    addToCartBtn.textContent = "Add to Cart";
+    addToCartBtn.classList.add("product-add");
 
-    addToCart.addEventListener("click", (e) => {
-      const cardEl = e.currentTarget.closest(".product-card");
-      console.log(cardEl?.dataset.id);
+    addToCartBtn.addEventListener("click", (e) => {
+      addToCart(product)
     });
 
-    card.appendChild(addToCart);
+    card.appendChild(addToCartBtn);
     fragment.appendChild(card);
   });
   productsContainer.appendChild(fragment);

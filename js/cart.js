@@ -1,15 +1,21 @@
 export function getCart() {
   let cartItems = localStorage.getItem("items");
   if (cartItems) return JSON.parse(cartItems);
-  else return [];
+  else return { items: {} };
 }
-export function addToCart(id) {
-  if (id != null) {
-    const cart = getCart();
-    if (cart.items[id]) cart.items.qty++;
-    else cart.items.qty = 1;
+export function addToCart(product) {
+  const cart = getCart();
+  if (! cart.items[product.id]) {
+    cart.items[product.id] = {
+      id: product.id,
+      price: product.price,
+      title: product?.title ?? "",
+      img: product?.img ?? "",
+      qty: 1,
+    };
   } else {
-    return null;
+    cart.items[product.id].qty++;
+    cart.items[product.id].price += product.price;
   }
 
   localStorage.setItem("items", JSON.stringify(cart));

@@ -1,14 +1,14 @@
 export function renderProducts(data) {
-  const productContainer = document.querySelector(".product-container");
-  if (!productContainer) {
-    throw new Error('Missing element: .product-container (check index.html)');
+  const productsContainer = document.querySelector(".product-container");
+  if (!productsContainer) {
+    throw new Error("Missing element: .product-container (check index.html)");
   }
 
   if (!Array.isArray(data)) {
     throw new TypeError("renderProducts expected an array");
   }
 
-  productContainer.innerHTML = "";
+  productsContainer.innerHTML = "";
 
   const fragment = document.createDocumentFragment();
 
@@ -40,7 +40,9 @@ export function renderProducts(data) {
 
     const description = document.createElement("p");
     description.classList.add("product-description");
-    description.textContent = product?.description ? String(product.description) : "";
+    description.textContent = product?.description
+      ? String(product.description)
+      : "";
 
     info.appendChild(name);
     info.appendChild(category);
@@ -51,5 +53,5 @@ export function renderProducts(data) {
     fragment.appendChild(card);
   });
 
-  productContainer.appendChild(fragment);
+  productsContainer.appendChild(fragment);
 }

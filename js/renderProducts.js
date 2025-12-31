@@ -50,6 +50,10 @@ export function renderProducts(data) {
     info.appendChild(description);
     card.appendChild(info);
 
+    const addToCart = document.createElement("button");
+    addToCart.textContent = "Add to Cart";
+    addToCart.classList.add("product-add");
+    card.appendChild(addToCart)
     fragment.appendChild(card);
   });
 

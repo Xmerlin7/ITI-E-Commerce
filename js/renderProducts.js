@@ -53,9 +53,14 @@ export function renderProducts(data) {
     const addToCart = document.createElement("button");
     addToCart.textContent = "Add to Cart";
     addToCart.classList.add("product-add");
-    card.appendChild(addToCart)
+
+    addToCart.addEventListener("click", (e) => {
+      const cardEl = e.currentTarget.closest(".product-card");
+      console.log(cardEl?.dataset.id);
+    });
+
+    card.appendChild(addToCart);
     fragment.appendChild(card);
   });
-
   productsContainer.appendChild(fragment);
 }

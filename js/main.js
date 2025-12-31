@@ -1,3 +1,6 @@
-import { getProducts } from "./product";
-let data = getProducts();
-console.log(data);
+import { getProducts } from "./products.js";
+async function allProducts() {
+  let data = await getProducts();
+  console.log(data);
+}
+allProducts();

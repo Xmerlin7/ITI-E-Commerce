@@ -1,4 +1,4 @@
-import { addToCart, deleteFromCart, getCart } from "./cart.js";
+import { addToCart } from "./cart.js";
 
 export function renderProducts(data) {
   const productsContainer = document.querySelector(".product-container");

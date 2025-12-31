@@ -10,7 +10,7 @@ export function addToCart(product) {
       id: product.id,
       price: product.price,
       title: product?.title ?? "",
-      img: product?.img ?? "",
+      img: product?.image,
       qty: 1,
     };
   } else {

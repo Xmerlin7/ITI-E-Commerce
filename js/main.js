@@ -1,4 +1,4 @@
-import { getProducts } from "./products.js";
+import { getProducts } from "./data/products.js";
 import { renderProducts } from "./renderProducts.js";
 async function main() {
   try {

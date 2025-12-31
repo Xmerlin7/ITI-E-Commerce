@@ -1,3 +1,3 @@
 export function renderProducts(data){
-      console.log(data);
+    console.log(data[1].id);
 }

@@ -1,7 +1,11 @@
 import { getProducts } from "./products.js";
 import { renderProducts } from "./renderProducts.js";
 async function main() {
-  let data = await getProducts();
-  renderProducts(data);
+  try {
+    const data = await getProducts();
+    renderProducts(data);
+  } catch (err) {
+    console.error("Failed to load/render products:", err);
+  }
 }
 main();

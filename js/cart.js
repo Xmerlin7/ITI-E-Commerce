@@ -30,8 +30,18 @@ export function deleteFromCart(product) {
 export function increaseFromCart(product) {
   let cart = getCart();
   if (cart.items[product.id]) {
-    delete cart.items[product.id];
+    cart.items[product.id].qty++;
     localStorage.setItem("items", JSON.stringify(cart));
   }
 }
-export function decreaseFromCart(product) {}
+export function decreaseFromCart(product) {
+  let cart = getCart();
+  if (cart.items[product.id]) {
+    cart.items[product.id].qty--;
+    cart.items[product.id].price -= product.price;
+    if (cart.items[product.id].qty == 0) {
+      deleteFromCart(product);
+    }
+    localStorage.setItem("items", JSON.stringify(cart));
+  }
+}

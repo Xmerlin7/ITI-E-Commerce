@@ -5,7 +5,7 @@ export function getCart() {
 }
 export function addToCart(product) {
   const cart = getCart();
-  if (! cart.items[product.id]) {
+  if (!cart.items[product.id]) {
     cart.items[product.id] = {
       id: product.id,
       price: product.price,
@@ -21,11 +21,17 @@ export function addToCart(product) {
   localStorage.setItem("items", JSON.stringify(cart));
 }
 export function deleteFromCart(product) {
-    let cart = getCart();
-    if(cart.items[product.id]){
-      delete cart.items[product.id];
-      localStorage.setItem("items", JSON.stringify(cart));
-    }
+  let cart = getCart();
+  if (cart.items[product.id]) {
+    delete cart.items[product.id];
+    localStorage.setItem("items", JSON.stringify(cart));
+  }
 }
-export function increaseFromCart(product) {}
+export function increaseFromCart(product) {
+  let cart = getCart();
+  if (cart.items[product.id]) {
+    delete cart.items[product.id];
+    localStorage.setItem("items", JSON.stringify(cart));
+  }
+}
 export function decreaseFromCart(product) {}

@@ -31,6 +31,7 @@ export function increaseFromCart(product) {
   let cart = getCart();
   if (cart.items[product.id]) {
     cart.items[product.id].qty++;
+    cart.items[product.id].price += product.price;
     localStorage.setItem("items", JSON.stringify(cart));
   }
 }

@@ -20,4 +20,6 @@ export function addToCart(product) {
 
   localStorage.setItem("items", JSON.stringify(cart));
 }
-export function deleteFromCart(it) {}
+export function deleteFromCart(id) {}
+export function increaseFromCart(id) {}
+export function decreaseFromCart(id) {}

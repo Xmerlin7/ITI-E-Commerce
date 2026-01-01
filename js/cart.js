@@ -31,7 +31,7 @@ export function increaseFromCart(product) {
   let cart = getCart();
   if (cart.items[product.id]) {
     const item = cart.items[product.id];
-    const unitPrice = item.qty ? item.price / item.qty : 0;
+    const unitPrice = item.price / item.qty;
     item.qty++;
     item.price += unitPrice;
     localStorage.setItem("items", JSON.stringify(cart));
@@ -41,7 +41,7 @@ export function decreaseFromCart(product) {
   let cart = getCart();
   if (cart.items[product.id]) {
     const item = cart.items[product.id];
-    const unitPrice = item.qty ? item.price / item.qty : 0;
+    const unitPrice = item.price / item.qty;
 
     if (item.qty <= 1) {
       delete cart.items[product.id];

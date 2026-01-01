@@ -20,6 +20,12 @@ export function addToCart(product) {
 
   localStorage.setItem("items", JSON.stringify(cart));
 }
-export function deleteFromCart(id) {}
-export function increaseFromCart(id) {}
-export function decreaseFromCart(id) {}
+export function deleteFromCart(product) {
+    let cart = getCart();
+    if(cart.items[product.id]){
+      delete cart.items[product.id];
+      localStorage.setItem("items", JSON.stringify(cart));
+    }
+}
+export function increaseFromCart(product) {}
+export function decreaseFromCart(product) {}

@@ -54,10 +54,10 @@ export function renderProducts(data) {
 
     const addToCartBtn = document.createElement("button");
     addToCartBtn.textContent = "Add to Cart";
-    addToCartBtn.classList.add("product-add");
+    addToCartBtn.classList.add("product-add", "btn", "btn-primary");
 
     addToCartBtn.addEventListener("click", (e) => {
-      addToCart(product)
+      addToCart(product);
     });
 
     card.appendChild(addToCartBtn);

@@ -8,28 +8,37 @@ import {
 function renderCart() {
   let cartContainer = document.getElementsByClassName("cart-container")[0];
   if (!cartContainer) return;
-  cartContainer.innerHTML = ""
+  cartContainer.innerHTML = "";
   let cartData = getCart();
   let cartProducts = Object.values(cartData.items || {});
   let fragment = document.createDocumentFragment();
   const total = cartProducts.reduce((sum, item) => sum + (item?.price ?? 0), 0);
   cartProducts.forEach((item) => {
     let info = document.createElement("div");
+    info.classList.add("cart-item");
     let img = document.createElement("img");
     img.src = item?.img || item?.image || "";
     img.alt = item?.title || "Cart product";
-    img.classList.add("car-img");
+    img.classList.add("cart-img");
     let subPrice = document.createElement("p");
+    subPrice.classList.add("cart-price");
     subPrice.textContent = item.price;
     let itemQuantity = document.createElement("p");
+    itemQuantity.classList.add("cart-qty");
     itemQuantity.textContent = item.qty;
     let buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("cart-actions");
     let deleteBtn = document.createElement("button");
     let increaseBtn = document.createElement("button");
     let decreaseBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     increaseBtn.textContent = "+";
     decreaseBtn.textContent = "-";
+
+    deleteBtn.classList.add("btn", "btn-danger");
+    increaseBtn.classList.add("btn", "btn-ghost");
+    decreaseBtn.classList.add("btn", "btn-ghost");
+
     buttonsDiv.appendChild(deleteBtn);
     buttonsDiv.appendChild(increaseBtn);
     buttonsDiv.appendChild(decreaseBtn);
@@ -52,6 +61,7 @@ function renderCart() {
     });
   });
   let totalPriceEl = document.createElement("p");
+  totalPriceEl.classList.add("cart-total");
   totalPriceEl.textContent = Math.floor(total);
   cartContainer.appendChild(fragment);
   cartContainer.appendChild(totalPriceEl);

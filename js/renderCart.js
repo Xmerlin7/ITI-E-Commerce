@@ -28,7 +28,11 @@ function renderCart() {
     let increaseBtn = document.createElement("button");
     let decreaseBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
+    increaseBtn.textContent = "+";
+    decreaseBtn.textContent = "-";
     buttonsDiv.appendChild(deleteBtn);
+    buttonsDiv.appendChild(increaseBtn);
+    buttonsDiv.appendChild(decreaseBtn);
     info.appendChild(img);
     info.appendChild(itemQuantity);
     info.appendChild(subPrice);
@@ -36,6 +40,14 @@ function renderCart() {
     fragment.appendChild(buttonsDiv);
     deleteBtn.addEventListener("click", () => {
       deleteFromCart(item);
+      renderCart();
+    });
+    increaseBtn.addEventListener("click", () => {
+      increaseFromCart(item);
+      renderCart();
+    });
+    decreaseBtn.addEventListener("click", () => {
+      decreaseFromCart(item);
       renderCart();
     });
   });

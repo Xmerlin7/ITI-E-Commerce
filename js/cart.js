@@ -30,19 +30,27 @@ export function deleteFromCart(product) {
 export function increaseFromCart(product) {
   let cart = getCart();
   if (cart.items[product.id]) {
-    cart.items[product.id].qty++;
-    cart.items[product.id].price += product.price;
+    const item = cart.items[product.id];
+    const unitPrice = item.qty ? item.price / item.qty : 0;
+    item.qty++;
+    item.price += unitPrice;
     localStorage.setItem("items", JSON.stringify(cart));
   }
 }
 export function decreaseFromCart(product) {
   let cart = getCart();
   if (cart.items[product.id]) {
-    cart.items[product.id].qty--;
-    cart.items[product.id].price -= product.price;
-    if (cart.items[product.id].qty == 0) {
-      deleteFromCart(product);
+    const item = cart.items[product.id];
+    const unitPrice = item.qty ? item.price / item.qty : 0;
+
+    if (item.qty <= 1) {
+      delete cart.items[product.id];
+      localStorage.setItem("items", JSON.stringify(cart));
+      return;
     }
+
+    item.qty--;
+    item.price -= unitPrice;
     localStorage.setItem("items", JSON.stringify(cart));
   }
 }

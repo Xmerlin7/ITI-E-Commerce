@@ -17,7 +17,10 @@ export function renderProducts(data) {
   data.forEach((product) => {
     const card = document.createElement("div");
     card.classList.add("product-card");
-    if (product?.id != null) card.dataset.id = String(product.id);
+    if (product?.id != null) {
+      card.dataset.id = String(product.id);
+      card.id = `product-${product.id}`;
+    }
 
     const img = document.createElement("img");
     img.classList.add("product-img");

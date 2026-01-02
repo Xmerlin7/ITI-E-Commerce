@@ -80,12 +80,12 @@ export function renderSlider(products) {
   nextBtn.addEventListener("click", nextSlide);
 
   renderCurrent();
-
+  // مش مهم خالص أنا عمري ما هنادي الrenderSlider مرتين
   if (autoplayIntervalId !== null) {
     clearInterval(autoplayIntervalId);
   }
   autoplayIntervalId = setInterval(nextSlide, AUTOPLAY_MS);
-  
+
   slider.addEventListener("mouseenter", () => {
     clearInterval(autoplayIntervalId);
   });

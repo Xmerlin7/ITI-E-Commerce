@@ -85,4 +85,12 @@ export function renderSlider(products) {
     clearInterval(autoplayIntervalId);
   }
   autoplayIntervalId = setInterval(nextSlide, AUTOPLAY_MS);
+  
+  slider.addEventListener("mouseenter", () => {
+    clearInterval(autoplayIntervalId);
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    autoplayIntervalId = setInterval(nextSlide, AUTOPLAY_MS);
+  });
 }

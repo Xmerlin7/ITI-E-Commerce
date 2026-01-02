@@ -13,13 +13,14 @@ export function renderSlider(products) {
   prevBtn.className = "btn btn-ghost";
   prevBtn.setAttribute("aria-label", "Previous slide");
   prevBtn.textContent = "‹";
+  prevBtn.style.fontSize = "40px"
 
   const nextBtn = document.createElement("button");
   nextBtn.type = "button";
   nextBtn.className = "btn btn-ghost";
   nextBtn.setAttribute("aria-label", "Next slide");
   nextBtn.textContent = "›";
-
+  nextBtn.style.fontSize = "40px"
   const link = document.createElement("a");
   link.className = "slider-view";
   link.href = "#";
@@ -70,10 +71,8 @@ export function renderSlider(products) {
 
   show(0);
 
-  if (sliderEl.__autoplayIntervalId) {
-    clearInterval(sliderEl.__autoplayIntervalId);
+  if (autoplayIntervalId !== null) {
+    clearInterval(autoplayIntervalId);
   }
-  sliderEl.__autoplayIntervalId = setInterval(() => {
-    show(index + 1);
-  }, AUTOPLAY_MS);
+  autoplayIntervalId = setInterval(nextSlide, AUTOPLAY_MS);
 }

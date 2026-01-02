@@ -1,3 +1,5 @@
+let autoplayIntervalId = null;
+
 export function renderSlider(products) {
   const sliderEl = document.querySelector(".slider-container");
   if (!sliderEl) return;
@@ -13,14 +15,14 @@ export function renderSlider(products) {
   prevBtn.className = "btn btn-ghost";
   prevBtn.setAttribute("aria-label", "Previous slide");
   prevBtn.textContent = "‹";
-  prevBtn.style.fontSize = "40px"
-
+  prevBtn.style.fontSize = "34px";
   const nextBtn = document.createElement("button");
   nextBtn.type = "button";
   nextBtn.className = "btn btn-ghost";
   nextBtn.setAttribute("aria-label", "Next slide");
   nextBtn.textContent = "›";
-  nextBtn.style.fontSize = "40px"
+  nextBtn.style.fontSize = "34px";
+
   const link = document.createElement("a");
   link.className = "slider-view";
   link.href = "#";
@@ -52,24 +54,32 @@ export function renderSlider(products) {
 
   const AUTOPLAY_MS = 3500;
 
-  const show = (nextIndex) => {
-    const len = products.length;
-    index = ((nextIndex % len) + len) % len;
-
+  function renderCurrent() {
     const p = products[index];
-    img.src = p?.image ?? "";
-    img.alt = p?.title ? String(p.title) : "Product";
-    title.textContent = p?.title ? String(p.title) : "";
-    price.textContent = p?.price != null ? `$${p.price}` : "";
 
-    const id = p?.id;
-    link.href = id != null ? `#product-${id}` : "#";
-  };
+    img.src = p && p.image ? p.image : "";
+    img.alt = p && p.title ? String(p.title) : "Product";
+    title.textContent = p && p.title ? String(p.title) : "";
+    price.textContent = p && p.price != null ? `$${p.price}` : "";
+    link.href = p && p.id != null ? `#product-${p.id}` : "#";
+  }
 
-  prevBtn.addEventListener("click", () => show(index - 1));
-  nextBtn.addEventListener("click", () => show(index + 1));
+  function nextSlide() {
+    index = index + 1;
+    if (index >= products.length) index = 0;
+    renderCurrent();
+  }
 
-  show(0);
+  function prevSlide() {
+    index = index - 1;
+    if (index < 0) index = products.length - 1;
+    renderCurrent();
+  }
+
+  prevBtn.addEventListener("click", prevSlide);
+  nextBtn.addEventListener("click", nextSlide);
+
+  renderCurrent();
 
   if (autoplayIntervalId !== null) {
     clearInterval(autoplayIntervalId);

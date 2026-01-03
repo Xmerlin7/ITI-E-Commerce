@@ -11,21 +11,17 @@ const CATEGORY_OPTIONS = [
 
 let allProducts = [];
 let selectedCategories = new Set();
-let filterRoot = null;
 
-function applyCategoryFilter(products, categoriesSet) {
-  if (!Array.isArray(products)) return [];
-  if (!(categoriesSet instanceof Set) || categoriesSet.size === 0)
-    return products;
-  return products.filter((p) => p && categoriesSet.has(p.category));
-}
+let uiBuilt = false;
 
 function ensureFilterUI() {
   if (!filterEl) filterEl = document.querySelector(".filter-container");
+  if (!filterEl) return;
+  if (uiBuilt) return;
 
   filterEl.innerHTML = "";
 
-  filterRoot = document.createElement("section");
+  const filterRoot = document.createElement("section");
   filterRoot.className = "filters";
 
   const title = document.createElement("p");
@@ -64,7 +60,11 @@ function ensureFilterUI() {
   clearBtn.className = "btn";
   clearBtn.textContent = "Clear";
   clearBtn.addEventListener("click", () => {
-    selectedCategories = new Set();
+    selectedCategories.clear();
+    const inputs = filterRoot.querySelectorAll('input[type="checkbox"]');
+    inputs.forEach((input) => {
+      input.checked = false;
+    });
     updateProductsView(allProducts);
   });
 
@@ -76,22 +76,21 @@ function ensureFilterUI() {
   filterRoot.appendChild(row);
   filterRoot.appendChild(actions);
   filterEl.appendChild(filterRoot);
-}
 
-function syncUIFromState() {
-  if (!filterRoot) return;
-  const inputs = filterRoot.querySelectorAll('input[type="checkbox"]');
-  inputs.forEach((input) => {
-    input.checked = selectedCategories.has(input.value);
-  });
+  uiBuilt = true;
 }
 
 export function updateProductsView(products) {
   allProducts = Array.isArray(products) ? products : [];
   ensureFilterUI();
 
-  syncUIFromState();
+  if (selectedCategories.size === 0) {
+    renderProducts(allProducts);
+    return;
+  }
 
-  const visibleProducts = applyCategoryFilter(allProducts, selectedCategories);
-  renderProducts(visibleProducts);
+  const filtered = allProducts.filter(
+    (p) => p && selectedCategories.has(p.category)
+  );
+  renderProducts(filtered);
 }

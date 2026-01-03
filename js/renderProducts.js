@@ -2,13 +2,7 @@ import { addToCart } from "./cart.js";
 
 export function renderProducts(data) {
   const productsContainer = document.querySelector(".product-container");
-  if (!productsContainer) {
-    throw new Error("Missing element: .product-container (check index.html)");
-  }
 
-  if (!Array.isArray(data)) {
-    throw new TypeError("renderProducts expected an array");
-  }
 
   productsContainer.innerHTML = "";
 

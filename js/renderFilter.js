@@ -1,6 +1,6 @@
 import { renderProducts } from "./renderProducts.js";
 
-let filterEl = document.querySelector(".filter-container");
+const filterEl = document.querySelector(".filter-container");
 
 const CATEGORY_OPTIONS = [
   { value: "men's clothing", label: "Men clothes" },
@@ -12,14 +12,8 @@ const CATEGORY_OPTIONS = [
 let allProducts = [];
 let selectedCategories = new Set();
 
-let uiBuilt = false;
-
-function ensureFilterUI() {
-  if (!filterEl) filterEl = document.querySelector(".filter-container");
-  if (!filterEl) return;
-  if (uiBuilt) return;
-
-  filterEl.innerHTML = "";
+function buildFilterUI() {
+  if (filterEl.querySelector(".filters")) return;
 
   const filterRoot = document.createElement("section");
   filterRoot.className = "filters";
@@ -38,59 +32,46 @@ function ensureFilterUI() {
     const input = document.createElement("input");
     input.type = "checkbox";
     input.value = opt.value;
-    input.checked = selectedCategories.has(opt.value);
 
-    input.addEventListener("change", (e) => {
-      const value = e.target.value;
-      if (e.target.checked) selectedCategories.add(value);
-      else selectedCategories.delete(value);
+    input.addEventListener("change", () => {
+      input.checked
+        ? selectedCategories.add(opt.value)
+        : selectedCategories.delete(opt.value);
+
       updateProductsView(allProducts);
     });
 
     const text = document.createElement("span");
     text.textContent = opt.label;
 
-    chip.appendChild(input);
-    chip.appendChild(text);
+    chip.append(input, text);
     row.appendChild(chip);
   });
 
   const clearBtn = document.createElement("button");
-  clearBtn.type = "button";
   clearBtn.className = "btn";
   clearBtn.textContent = "Clear";
-  clearBtn.addEventListener("click", () => {
+  clearBtn.onclick = () => {
     selectedCategories.clear();
-    const inputs = filterRoot.querySelectorAll('input[type="checkbox"]');
-    inputs.forEach((input) => {
-      input.checked = false;
-    });
+    row.querySelectorAll("input").forEach((i) => (i.checked = false));
     updateProductsView(allProducts);
-  });
+  };
 
-  const actions = document.createElement("div");
-  actions.className = "filters-actions";
-  actions.appendChild(clearBtn);
-
-  filterRoot.appendChild(title);
-  filterRoot.appendChild(row);
-  filterRoot.appendChild(actions);
+  filterRoot.append(title, row, clearBtn);
   filterEl.appendChild(filterRoot);
-
-  uiBuilt = true;
 }
 
 export function updateProductsView(products) {
-  allProducts = Array.isArray(products) ? products : [];
-  ensureFilterUI();
+  allProducts = products;
+
+  buildFilterUI();
 
   if (selectedCategories.size === 0) {
     renderProducts(allProducts);
     return;
   }
 
-  const filtered = allProducts.filter(
-    (p) => p && selectedCategories.has(p.category)
+  renderProducts(
+    allProducts.filter((p) => selectedCategories.has(p.category))
   );
-  renderProducts(filtered);
 }

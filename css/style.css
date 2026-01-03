@@ -198,6 +198,56 @@ body {
   margin: 0 0 14px;
 }
 
+/* Filters */
+.filter-container {
+  margin: 0 0 14px;
+}
+
+.filters {
+  border: 1px solid var(--border);
+  background: rgba(18, 26, 51, 0.75);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.filters-title {
+  margin: 0 0 10px;
+  font-weight: 800;
+}
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+}
+
+.filter-chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.filter-chip input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+}
+
+.filters-actions {
+  margin-top: 12px;
+}
+
 .slider {
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr) 42px;

@@ -15,7 +15,8 @@ let filterRoot = null;
 
 function applyCategoryFilter(products, categoriesSet) {
   if (!Array.isArray(products)) return [];
-  if (!(categoriesSet instanceof Set) || categoriesSet.size === 0) return products;
+  if (!(categoriesSet instanceof Set) || categoriesSet.size === 0)
+    return products;
   return products.filter((p) => p && categoriesSet.has(p.category));
 }
 

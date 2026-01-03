@@ -215,6 +215,10 @@ body {
   font-weight: 800;
 }
 
+.filters-clear {
+  margin-top: 5px;
+}
+
 .filters-row {
   display: flex;
   flex-wrap: wrap;

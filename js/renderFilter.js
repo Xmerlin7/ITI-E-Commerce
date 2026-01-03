@@ -59,7 +59,7 @@ function buildFilterUI() {
   });
 
   const clearBtn = document.createElement("button");
-  clearBtn.className = "btn";
+  clearBtn.className = "btn filters-clear";
   clearBtn.textContent = "Clear";
   clearBtn.onclick = () => {
     selectedCategories.clear();

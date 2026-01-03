@@ -22,8 +22,6 @@ function applyCategoryFilter(products, categoriesSet) {
 
 function ensureFilterUI() {
   if (!filterEl) filterEl = document.querySelector(".filter-container");
-  if (!filterEl) return;
-  if (filterRoot) return;
 
   filterEl.innerHTML = "";
 

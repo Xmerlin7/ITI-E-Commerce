@@ -221,6 +221,22 @@ body {
   gap: 10px;
 }
 
+.filters-search {
+  width: min(520px, 100%);
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  outline: none;
+}
+
+.filters-search:focus-visible {
+  outline: 2px solid rgba(45, 212, 191, 0.7);
+  outline-offset: 2px;
+}
+
 .filter-chip {
   display: inline-flex;
   align-items: center;

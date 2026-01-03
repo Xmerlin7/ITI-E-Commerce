@@ -11,6 +11,7 @@ const CATEGORY_OPTIONS = [
 
 let allProducts = [];
 let selectedCategories = new Set();
+let searchTerm = "";
 
 function buildFilterUI() {
   if (filterEl.querySelector(".filters")) return;
@@ -21,6 +22,15 @@ function buildFilterUI() {
   const title = document.createElement("p");
   title.className = "filters-title";
   title.textContent = "Category";
+
+  const searchInput = document.createElement("input");
+  searchInput.type = "search";
+  searchInput.placeholder = "Search by title";
+  searchInput.className = "filters-search";
+  searchInput.addEventListener("input", () => {
+    searchTerm = searchInput.value;
+    updateProductsView(allProducts);
+  });
 
   const row = document.createElement("div");
   row.className = "filters-row";
@@ -54,24 +64,31 @@ function buildFilterUI() {
   clearBtn.onclick = () => {
     selectedCategories.clear();
     row.querySelectorAll("input").forEach((i) => (i.checked = false));
+    searchTerm = "";
+    searchInput.value = "";
     updateProductsView(allProducts);
   };
 
-  filterRoot.append(title, row, clearBtn);
+  filterRoot.append(title, searchInput, row, clearBtn);
   filterEl.appendChild(filterRoot);
 }
 
 export function updateProductsView(products) {
-  allProducts = products;
+  allProducts = Array.isArray(products) ? products : [];
 
   buildFilterUI();
 
-  if (selectedCategories.size === 0) {
-    renderProducts(allProducts);
-    return;
-  }
+  const q = String(searchTerm || "")
+    .trim()
+    .toLowerCase();
 
-  renderProducts(
-    allProducts.filter((p) => selectedCategories.has(p.category))
-  );
+  const filtered = allProducts.filter((p) => {
+    const inCategory =
+      selectedCategories.size === 0 || selectedCategories.has(p.category);
+    const titleText = String(p?.title || "").toLowerCase();
+    const inSearch = q === "" || titleText.includes(q);
+    return inCategory && inSearch;
+  });
+
+  renderProducts(filtered);
 }

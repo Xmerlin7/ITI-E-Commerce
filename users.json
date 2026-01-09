@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "76fcdb02-d685-455e-9608-dff6a2b20ad8",
+      "name": "seif",
+      "email": "seifahmedjr7@gmail.com",
+      "createdAt": "2026-01-09T17:30:15.717Z",
+      "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92"
+    }
+  ],
+  "exportedAt": "2026-01-09T17:30:52.653Z"
+}

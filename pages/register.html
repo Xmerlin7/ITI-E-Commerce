@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/auth/header.js" type="module"></script>
+    <script src="../js/register.js" type="module"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-row">
+        <a class="nav-link" href="index.html">Products</a>
+        <a class="nav-link" href="cart.html">Cart</a>
+        <div class="topbar-spacer"></div>
+        <div class="topbar-auth" data-auth-slot></div>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="panel">
+        <h1 class="panel-title">Register</h1>
+
+        <form class="form" id="registerForm">
+          <label class="field">
+            <span class="field-label">Name</span>
+            <input class="input" type="text" name="name" required />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Email</span>
+            <input class="input" type="email" name="email" required />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Password</span>
+            <input
+              class="input"
+              type="password"
+              name="password"
+              minlength="6"
+              required
+            />
+          </label>
+
+          <p class="form-error" id="registerError" hidden></p>
+
+          <button class="btn btn-primary" type="submit">Create account</button>
+        </form>
+
+        <div class="panel-divider"></div>
+
+        <div class="panel-row">
+          <a class="nav-link" href="login.html">Already have an account?</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

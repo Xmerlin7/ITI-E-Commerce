@@ -4,8 +4,7 @@ import {
   normalizeEmail,
   isValidEmail,
   isValidPassword,
-  downloadUsersJson,
-  importUsersJsonFile,
+
 } from "./auth.js";
 
 const form = document.getElementById("loginForm");
@@ -57,19 +56,4 @@ form?.addEventListener("submit", (e) => {
   window.location.href = "index.html";
 });
 
-exportBtn?.addEventListener("click", () => {
-  downloadUsersJson("users.json");
-});
 
-importFile?.addEventListener("change", async () => {
-  clearError();
-  try {
-    const file = importFile.files?.[0];
-    const count = await importUsersJsonFile(file);
-    showError(`Imported ${count} users. You can login now.`);
-  } catch (err) {
-    showError(err?.message || "Import failed");
-  } finally {
-    importFile.value = "";
-  }
-});

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/login.js" type="module"></script>
   </head>
   <body>
     <header class="topbar">
@@ -42,22 +43,9 @@
 
         <div class="panel-divider"></div>
 
-        <div class="panel-row">
-          <button class="btn" id="exportUsersBtn" type="button">
-            Export users.json
-          </button>
-          <label class="btn" for="importUsersFile">Import users.json</label>
-          <input
-            id="importUsersFile"
-            class="file"
-            type="file"
-            accept="application/json"
-          />
-        </div>
-        <p class="form-hint" id="importHint">
-          Import will replace local users on this browser.
-        </p>
+        
       </section>
     </main>
   </body>
 </html>
+

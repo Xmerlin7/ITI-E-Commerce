@@ -3,6 +3,14 @@ export function getCart() {
   if (cartItems) return JSON.parse(cartItems);
   else return { items: {} };
 }
+
+function notifyCartChanged() {
+  // minimal: allows navbar/cart count to update in the same tab
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("cart:changed"));
+  }
+}
+
 export function addToCart(product) {
   const cart = getCart();
   if (!cart.items[product.id]) {
@@ -19,12 +27,14 @@ export function addToCart(product) {
   }
 
   localStorage.setItem("items", JSON.stringify(cart));
+  notifyCartChanged();
 }
 export function deleteFromCart(product) {
   let cart = getCart();
   if (cart.items[product.id]) {
     delete cart.items[product.id];
     localStorage.setItem("items", JSON.stringify(cart));
+    notifyCartChanged();
   }
 }
 export function increaseFromCart(product) {
@@ -35,6 +45,7 @@ export function increaseFromCart(product) {
     item.qty++;
     item.price += unitPrice;
     localStorage.setItem("items", JSON.stringify(cart));
+    notifyCartChanged();
   }
 }
 export function decreaseFromCart(product) {
@@ -46,11 +57,13 @@ export function decreaseFromCart(product) {
     if (item.qty <= 1) {
       delete cart.items[product.id];
       localStorage.setItem("items", JSON.stringify(cart));
+      notifyCartChanged();
       return;
     }
 
     item.qty--;
     item.price -= unitPrice;
     localStorage.setItem("items", JSON.stringify(cart));
+    notifyCartChanged();
   }
 }

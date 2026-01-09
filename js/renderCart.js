@@ -5,12 +5,19 @@ import {
   decreaseFromCart,
   increaseFromCart,
 } from "./cart.js";
+import { getSession } from "./auth.js";
 
 const buyBtn = document.getElementById("buyBtn");
 const orderMessage = document.getElementById("orderMessage");
 
 buyBtn?.addEventListener("click", () => {
   if (buyBtn?.disabled) return;
+
+  const session = getSession();
+  if (!session?.email) {
+    window.location.href = "login.html";
+    return;
+  }
 
   const shippedText = "Your order has been shipped";
   clearCart();

@@ -4,6 +4,11 @@ export function getCart() {
   else return { items: {} };
 }
 
+export function clearCart() {
+  localStorage.setItem("items", JSON.stringify({ items: {} }));
+  notifyCartChanged();
+}
+
 function notifyCartChanged() {
   // minimal: allows navbar/cart count to update in the same tab
   if (typeof window !== "undefined") {

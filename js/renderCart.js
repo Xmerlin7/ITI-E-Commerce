@@ -1,5 +1,6 @@
 import {
   getCart,
+  clearCart,
   deleteFromCart,
   decreaseFromCart,
   increaseFromCart,
@@ -10,12 +11,16 @@ const orderMessage = document.getElementById("orderMessage");
 
 buyBtn?.addEventListener("click", () => {
   if (buyBtn?.disabled) return;
+
+  const shippedText = "Your order has been shipped";
+  clearCart();
+  renderCart();
+
   if (orderMessage) {
-    orderMessage.textContent = "Your order has been shipped";
+    orderMessage.textContent = shippedText;
     orderMessage.hidden = false;
   } else {
-    // fallback
-    alert("Your order has been shipped");
+    alert(shippedText);
   }
 });
 

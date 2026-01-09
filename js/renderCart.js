@@ -5,6 +5,20 @@ import {
   increaseFromCart,
 } from "./cart.js";
 
+const buyBtn = document.getElementById("buyBtn");
+const orderMessage = document.getElementById("orderMessage");
+
+buyBtn?.addEventListener("click", () => {
+  if (buyBtn?.disabled) return;
+  if (orderMessage) {
+    orderMessage.textContent = "Your order has been shipped";
+    orderMessage.hidden = false;
+  } else {
+    // fallback
+    alert("Your order has been shipped");
+  }
+});
+
 function renderCart() {
   let cartContainer = document.getElementsByClassName("cart-container")[0];
   if (!cartContainer) return;
@@ -13,6 +27,10 @@ function renderCart() {
   let cartProducts = Object.values(cartData.items || {});
   let fragment = document.createDocumentFragment();
   const total = cartProducts.reduce((sum, item) => sum + (item?.price ?? 0), 0);
+
+  if (buyBtn) buyBtn.disabled = cartProducts.length === 0 || total <= 0;
+  if (orderMessage) orderMessage.hidden = true;
+
   cartProducts.forEach((item) => {
     let info = document.createElement("div");
     info.classList.add("cart-item");

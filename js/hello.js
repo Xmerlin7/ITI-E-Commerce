@@ -8,6 +8,7 @@ if (hello) {
     hello.textContent = `Hi, ${user.name}`;
   } else {
     hello.textContent = "";
+    hello.style.display = "none";
   }
 }
 

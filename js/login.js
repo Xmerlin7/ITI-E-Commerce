@@ -9,8 +9,6 @@ import {
 
 const form = document.getElementById("loginForm");
 const errorEl = document.getElementById("loginError");
-const exportBtn = document.getElementById("exportUsersBtn");
-const importFile = document.getElementById("importUsersFile");
 
 function showError(msg) {
   errorEl.textContent = msg;
